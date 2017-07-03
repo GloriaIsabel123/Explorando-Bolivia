@@ -32,21 +32,24 @@
 	<script type="text/javascript">
 		var init = function(){
 
-			var proyeccion = new OpenLayers.Projection("EPSG:900913"); //EPSG:900913
 			var cn = new OpenLayers.Control.Navigation();
-			var cz = new OpenLayers.Control.PanZoomBar(); // Zoom
-
-			// Propiedades del objeto Map
+			var cz = new OpenLayers.Control.PanZoomBar(); 
+            
+			var fromProjection = new OpenLayers.Projection("EPSG:4326"); 
+    		var toProjection = new OpenLayers.Projection("EPSG:900913");		
+            
+            var extension = new OpenLayers.Bounds(-71.54296875,-24.3671135627,-56.07421875,-7.3624668655).transform(fromProjection,toProjection);
+    		
 			var propiedades = {
-				projection: proyeccion,
+				maxExtent : extension,
+				displayProjection: fromProjection,
+				projection: toProjection,
 				units: 'm',
 				controls: [cn, cz]
 			};
 
-			//Creación de una instancia de la clase Map
 			var map = new OpenLayers.Map("mapa", propiedades);	
 
-			// Capa OSM
 			var layerOSM = new OpenLayers.Layer.OSM();
 			map.addLayer(layerOSM);
 
@@ -57,9 +60,17 @@
 
 			var controlCapas = new OpenLayers.Control.LayerSwitcher();
 			map.addControl(controlCapas);
-
-        }
-		// Cargamos la función init, para desplegar el mapa
+            
+            
+    		var LonLat = new OpenLayers.LonLat(-64.819336, -17.379999);
+			var zoom = 5;
+			var LonLatTransformado = LonLat.transform(
+				new OpenLayers.Projection("EPSG:4326"),
+				map.getProjection() 
+			);
+			map.setCenter(LonLatTransformado, zoom);
+         
+            }
 		window.onload = init;
 	
 	</script>

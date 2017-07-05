@@ -171,6 +171,21 @@
             map.addControl(controlinfo);
             controlinfo.activate();
 
+            layer_marcador = new OpenLayers.Layer.Markers( "Marcador" );
+        	
+            map.addLayer(layer_marcador);
+            
+            tamanio = new OpenLayers.Size(21, 25);
+            offset = new OpenLayers.Pixel(-(tamanio.w / 2), -tamanio.h);
+          
+            icono = new OpenLayers.Icon('https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/img/marker.png', tamanio, offset);
+           
+            layer_marcador.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(-64.819336, -17.379999).transform(
+                    fromProjection, 				
+            		toProjection 						
+            	), icono)
+            );
+
             }
           
 		window.onload = init;

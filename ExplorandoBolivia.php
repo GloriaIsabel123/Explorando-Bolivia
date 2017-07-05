@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@
 			height: 90%;
 			width: 100%;
 		}
-
+		
 	</style>
 	<script type="text/javascript">
 		var init = function(){
@@ -163,12 +164,13 @@
 	        eventListeners: {
 		    getfeatureinfo: function (event){
 			var info=document.getElementById("informacion");
-			info.innerHTML()=event.text;
-		    }
-	        }
-            });
+			info.innerHTML=event.text;
+		                                    }
+	                       }
+                                                                        });
             map.addControl(controlinfo);
             controlinfo.activate();
+
             }
           
 		window.onload = init;

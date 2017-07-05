@@ -171,7 +171,7 @@
             map.addControl(controlinfo);
             controlinfo.activate();
 
-            layer_marcador = new OpenLayers.Layer.Markers( "Marcador" );
+            layer_marcador = new OpenLayers.Layer.Markers("Lugares Turisticos" );
         	
             map.addLayer(layer_marcador);
             
@@ -179,15 +179,24 @@
             offset = new OpenLayers.Pixel(-(tamanio.w / 2), -tamanio.h);
           
             icono = new OpenLayers.Icon('https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/img/marker.png', tamanio, offset);
-           
-            layer_marcador.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(-64.819336, -17.379999).transform(
-                    fromProjection, 				
-            		toProjection 						
-            	), icono)
-            );
 
-            }
-          
+            var marker1= new OpenLayers.Marker(new OpenLayers.LonLat(-68.673941,-16.555237).transform(fromProjection, toProjection), icono);
+
+            layer_marcador.addMarker(marker1);
+
+            marker1.events.register("click",marker1,function(e){
+                   var popup1 = new OpenLayers.Popup(
+                   'Popup',
+                   map.getLonLatFromPixel(e.xy),
+                   new OpenLayers.Size(50,80),
+                   "Tiwanacu",
+                   true);
+
+                   map.addPopup(popup1);
+
+                   });
+
+          }
 		window.onload = init;
 	
 	</script>
